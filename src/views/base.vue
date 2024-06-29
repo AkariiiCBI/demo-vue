@@ -1,99 +1,54 @@
-<!--
- * @Description: 
- * @Version: 1.0
- * @Autor: Li Cheng
- * @Date: 2024-06-24 15:18:28
- * @LastEditors: Li Cheng
- * @LastEditTime: 2024-06-24 15:22:19
--->
 <template>
-  <h1 :class="'text-' + age" class="font-size-20">
-    {{ name }} - {{ age === 16 ? '少年' : '成年人' }} - {{ sex(0) }}
-  </h1>
-
-  <h1 v-bind="obj">{{ name }} - {{ age === 16 ? '少年' : '成年人' }} - {{ sex(0) }}</h1>
-
-  <h1 v-if="hasBro">有弟弟：王钢蛋</h1>
-  <h2 v-if="hasBro">{{ state.name }} - {{ state.age }} - {{ state.sex }}</h2>
-  <h1 v-else>没有弟弟</h1>
-  <button @click="isBro">疑问？</button>
-  <button @click="change">切换</button>
-
-  <h1 :class="[isActive ? 'active' : '']">李四</h1>
-  <button @click="isActive = !isActive">选中李四</button>
-
-  <h1 :style="{ color: fontColor }">李四</h1>
-  <div v-if="type === 1">1</div>
-  <div v-else-if="type === 2">2</div>
-  <div v-else-if="type === 3">3</div>
-  <div v-else>4</div>
+  <div class="welcome-container">
+    <h1>欢迎来到学生管理系统</h1>
+    <button @click="toggleMessage">{{ showMessage ? '隐藏' : '显示' }} 欢迎消息</button>
+    <p v-if="showMessage">{{ welcomeMessage }}</p>
+  </div>
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue';
+import { ref } from 'vue';
 
-const name = ref('铁锤妹妹🔨');
-const age = ref(18);
-function sex(sex) {
-  return sex === 1 ? '男' : '女';
+const welcomeMessage = ref('这是一个简洁的欢迎页。');
+const showMessage = ref(false);
+
+function toggleMessage() {
+  showMessage.value = !showMessage.value;
 }
-
-const obj = {
-  class: 'text-16',
-  id: 'font-size-24'
-};
-
-let hasBro = ref(false);
-console.log(hasBro);
-
-function isBro() {
-  alert('到底有没有？');
-  console.log(age);
-}
-
-const state = reactive({
-  name: '王钢蛋',
-  age: 16,
-  sex: '男'
-});
-
-const change = () => {
-  hasBro.value = !hasBro.value;
-  console.log(hasBro);
-  state.age = 17;
-  console.log(state);
-};
-
-console.log(state);
-const isActive = ref(true);
-
-const fontColor = ref('red');
-
-const type = ref(5);
 </script>
 
 <style scoped>
-.text-16 {
-  color: red;
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f0f8ff;
+  color: #333;
 }
 
-.text-18 {
-  color: blue;
+h1 {
+  font-size: 3em;
+  margin-bottom: 0.5em;
 }
 
-.font-size-20 {
-  font-size: 20px;
+p {
+  font-size: 1.5em;
 }
 
-#font-size-24 {
-  font-size: 24px;
+button {
+  margin-top: 1em;
+  padding: 0.5em 1em;
+  font-size: 1em;
+  cursor: pointer;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
 }
 
-.active {
-  color: green;
-}
-
-.text-gray {
-  color: gray;
+button:hover {
+  background-color: #0056b3;
 }
 </style>
