@@ -1,19 +1,27 @@
 <template>
   <div class="welcome-container">
     <h1>欢迎来到学生管理系统</h1>
+    <p>点击下方按钮进入</p>
     <button @click="toggleMessage">{{ showMessage ? '隐藏' : '显示' }} 欢迎消息</button>
     <p v-if="showMessage">{{ welcomeMessage }}</p>
+    <button @click="goToList">跳转到列表页</button>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const welcomeMessage = ref('这是一个简洁的欢迎页。');
 const showMessage = ref(false);
 
 function toggleMessage() {
   showMessage.value = !showMessage.value;
+}
+
+const router = useRouter();
+function goToList() {
+  router.push('/list');
 }
 </script>
 
@@ -43,12 +51,12 @@ button {
   font-size: 1em;
   cursor: pointer;
   border: none;
-  background-color: #007bff;
+  background-color: #767676;
   color: white;
   border-radius: 5px;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #0f0f0f;
 }
 </style>
