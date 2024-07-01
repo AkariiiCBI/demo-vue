@@ -3,6 +3,7 @@ import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/store/user';
 import { useMouse } from "@/utils/hooks";
+import { Modal } from 'ant-design-vue';
 
 const userStore = useUserStore();
 // 此时userStore 并不是响应式数据 需要变成响应式的
