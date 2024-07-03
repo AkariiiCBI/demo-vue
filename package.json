@@ -9,7 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@babylonjs/core": "^7.13.1",
+    "@babylonjs/inspector": "^7.13.1",
+    "@babylonjs/loaders": "^7.13.1",
     "ant-design-vue": "^4.2.3",
+    "babylonjs": "^7.13.1",
+    "babylonjs-loaders": "^7.13.1",
+    "echarts": "^5.5.1",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
     "vue": "^3.4.29",

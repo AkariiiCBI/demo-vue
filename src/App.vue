@@ -14,10 +14,10 @@ const { updateName } = userStore;
 const type = ref('base');
 const message = ref('你好👋');
 
-const {x, y} = useMouse();
+const { x, y } = useMouse();
 watch(type, (newType) => {
   console.log(`type is ${newType}`)
-}, {immediate: true})
+}, { immediate: true })
 const userPath = ref('/user/456');
 
 function warn(message, event) {
@@ -31,17 +31,13 @@ function warn(message, event) {
 </script>
 
 <template>
-    <div class="nav-wrapper">
-      <div
-        class="mr-10"
-        :class="{active: type === item}"
-        v-for="(item, index) in ['base', 'computed', 'list', 'hello', 'form', 'life', 'user', 'fa']"
-        :key="`nav_${index}`"
-        @click="type = item"
-      >
-        <RouterLink :to="`/${item}`">{{item}}</RouterLink>
-      </div>
+  <div class="nav-wrapper">
+    <div class="mr-10" :class="{ active: type === item }"
+      v-for="(item, index) in ['base',  'list', 'web',  'life']"
+      :key="`nav_${index}`" @click="type = item">
+      <RouterLink :to="`/${item}`">{{ item }}</RouterLink>
     </div>
+  </div>
   <!-- </div> -->
 
   <main>
@@ -66,6 +62,7 @@ function warn(message, event) {
   display: inline-block;
   margin-right: 10px;
 }
+
 .nav-wrapper {
   height: 64px;
   width: 100%;
