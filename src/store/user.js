@@ -11,6 +11,7 @@ export const useUserStore = defineStore('user', {
     isEditing: false,
     editForm: {
       index: -1,
+      id: null,
       userName: '',
       age: null,
     },
@@ -26,24 +27,28 @@ export const useUserStore = defineStore('user', {
       this.list.splice(index, 1);
     },
     openEditDialog(index) {
+      const user = this.list[index];
       this.editForm.index = index;
-      this.editForm.userName = this.list[index].userName;
-      this.editForm.age = this.list[index].age;
+      this.editForm.id = user.id;
+      this.editForm.userName = user.userName;
+      this.editForm.age = user.age;
       this.isEditing = true;
     },
     saveEdit() {
       if (this.editForm.index > -1) {
         const updatedUser = {
-          ...this.list[this.editForm.index],
+          id: this.editForm.id,
           userName: this.editForm.userName,
           age: this.editForm.age,
         };
         this.list.splice(this.editForm.index, 1, updatedUser);
         this.isEditing = false;
+        this.editForm = { index: -1, id: null, userName: '', age: null };
       }
     },
     cancelEdit() {
       this.isEditing = false;
+      this.editForm = { index: -1, id: null, userName: '', age: null };
     },
     openAddDialog() {
       this.newUser.id = null;
@@ -52,17 +57,28 @@ export const useUserStore = defineStore('user', {
       this.isAdding = true;
     },
     saveAdd() {
-      const addedUser = { ...this.newUser };
-      this.list.unshift(addedUser);
-      this.isAdding = false;
+      const { id, userName, age } = this.newUser;
+      if (id !== null && userName && age !== null) {
+        const addedUser = { id, userName, age };
+        this.list.unshift(addedUser);
+        this.isAdding = false;
+        this.newUser = { id: null, userName: '', age: null };
+      } else {
+        alert('所有字段都是必填的');
+      }
     },
     cancelAdd() {
       this.isAdding = false;
+      this.newUser = { id: null, userName: '', age: null };
     },
     getYourName(id) {
       const student = this.list.find(item => item.id === id);
-      alert(student.userName);
+      if (student) {
+        alert(student.userName);
+      } else {
+        alert('找不到该学号的学生');
+      }
     },
   },
-  persist: true, // 启用持久化存储
+  persist: true,
 });

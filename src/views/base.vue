@@ -5,6 +5,7 @@
     <button @click="toggleMessage">{{ showMessage ? '隐藏' : '显示' }} 欢迎消息</button>
     <p v-if="showMessage">{{ welcomeMessage }}</p>
     <button @click="goToList">跳转到列表页</button>
+    <button @click="goToweb">跳转到图书馆界面</button>
   </div>
 </template>
 
@@ -23,6 +24,10 @@ const router = useRouter();
 function goToList() {
   router.push('/list');
 }
+function goToweb() {
+  router.push('/life');
+}
+
 </script>
 
 <style scoped>
